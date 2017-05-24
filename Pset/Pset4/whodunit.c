@@ -46,8 +46,19 @@ int main(int argc,char *argv[])
 	fwrite(&bi,sizeof(BITMAPINFOHEADER),1,outptr);
 
 	int padding=(4-(bi.biWidth*sizeof(RGBTRIPLE))%4)%4;
-
 	
+	for(int i=0,biHeight=abs(bi.biHeight);i<biHeight;i++)
+	{
+		for(int j=0;j<biWidth;j++)
+		{
+
+			RGBTRIPLE triple;
+			fread(&triple,sizeof(RGBTRIPLE),1,inptr);
+		}
+	}
+
+
+
 
 
 }
