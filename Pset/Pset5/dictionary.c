@@ -105,5 +105,22 @@ unsigned int size(void)
 		return 0;
 }
 
+bool unload(void)
+{
+	for(int i=0;i<HASHTABLE_SIZE;i++)
+	{
+		node* cursor=hash[i];
+		while(cursor!=NULL)
+		{
+			node* temp=cursor;
+			cursor=cursor->next;
+			free(temp);
+		}
+	}
+	var=false;
+	return true;
+}
+
+
 
 
