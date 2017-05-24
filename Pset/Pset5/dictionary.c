@@ -58,6 +58,52 @@ bool check(const char* word)
 	return false;
 }
 
+bool load(const char* dictionary)
+{
+	for(int i=0;i<HASHTABLE_SIZE;i++)
+	{
+		hash[i]=NULL;
+	}
+	FILE* fp=fopen(dictionary,"r");
+	if(fp==NULL)
+	{
+		printf("Could not open dictionary.\n");
+		return false;
+	}
+	while(true)
+	{
+		node* new_node=malloc(sizeof(node));
+		if(new_node==NULL)
+		{
+			printf("Could not malloc a new node.\n");
+			return false;
+		}
+
+		fscanf(fp,"%s",new_node->word);
+		node* head=hash[h];
+
+		if(head==NULL)
+		{
+			hash[h]=new_node;
+		}
+		else
+		{
+			new_node->next=hash[h];
+			hash[h]=new_node;
+		}
+	}
+	fclose(fp);
+	var=true;
+	return true;
+}
+
+unsigned int size(void)
+{
+	if(var)
+		return count;
+	else 
+		return 0;
+}
 
 
 
