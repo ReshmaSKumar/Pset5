@@ -72,8 +72,19 @@ int main(int argc,char *argv[])
 				fwrite(&triple,sizeof(RGBTRIPLE),1,outptr);
 			}
 		}
+		fseek(inptr,origpadding,SEEK_CUR);
 
-				
+		for(int k=0;k<padding;k++)
+		{
+			fputc(0x00,outptr);
+		}
+		long offset=origwidth*sizeof(RGBTRIPLE)+origpadding;
+		if((i+1)%num!=0)
+			fseek(inptr,-offset,SEEK_CUR);
+	}
+	fclose(inptr);
+	fclose(outptr);
+	return 0;				
 
 }
 
