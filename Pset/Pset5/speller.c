@@ -46,6 +46,35 @@ int main(int argc,char* argv[])
 		unload();
 		return 1;
 	}
+
+
+	printf("\nMISSPELLED WORDS\n\n");
+
+	int index=0,misspellings=0,words=0;
+	char word[LENGTH+1];
+
+	for(int c=fgetc(fp);c!=EOF;c=fgetc(fp))
+	{
+		if(isalpha(c)||(c=='\''&&index>0))
+		{
+			word[index]=c;
+			index++;
+
+			if(index>LENGTH)
+			{
+				while((c=fgetc(fp))!=EOF&&isapha(c));
+				index=0;
+			}
+		}
+	
+	
+	
+	
+	
+	
+	}
+
+
 }
 
 
