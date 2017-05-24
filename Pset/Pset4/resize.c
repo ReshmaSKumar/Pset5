@@ -59,7 +59,21 @@ int main(int argc,char *argv[])
 
 	fwrite(&bf,sizeof(BITMAPFILEHEADER),1,outptr);
 	fwrite(&bi,sizeof(BITMAPINFOHEADER),1,outptr);
+	for(int i=0,biHeight=abs(bi.biHeight);i<biHeight;i++)
+	{
+		for(int j=0;j<origwidth;j++)
+		{
+			RGBTRIPLE triple;
 
+			fread(&triple,sizeof(RGBTRIPLE),1,inptr);
+
+			for(intp=0;p<num;p++)
+			{
+				fwrite(&triple,sizeof(RGBTRIPLE),1,outptr);
+			}
+		}
+
+				
 
 }
 
