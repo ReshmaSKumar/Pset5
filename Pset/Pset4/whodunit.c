@@ -54,6 +54,16 @@ int main(int argc,char *argv[])
 
 			RGBTRIPLE triple;
 			fread(&triple,sizeof(RGBTRIPLE),1,inptr);
+
+			if(triple.rgbtRed==0xff)
+				triple.rgbtRed=0x00;
+			if(triple.rgbtBlue==0xff)
+				triple.rgbtBlue=0x00;
+			if(triple.rgbtGreen==0xff)
+				triple.rgbtGreen=0x00;
+
+			fwrite(&triple,sizeof(RGBTRIPLE),1,outptr);
+
 		}
 	}
 
