@@ -66,13 +66,33 @@ int main(int argc,char* argv[])
 				index=0;
 			}
 		}
-	
-	
-	
-	
-	
+		else
+			if(isdigit(c))
+			{
+				while((c=fgetc(fp))!=EOF&&isalnum(c));
+				index=0;
+			}
+			else if(index>0)
+			{
+				word[index]='\0';
+				words++;
+				getrusage(RUSAGE_SELF,&before);
+				bool misspelled=!check(word);
+				getrusage(RUSAGE_SELF,&after);
+				time_check+=calculate(&before,&after);
+
+				if(misspelled)
+				{
+					printf("%s\n",word);
+					misspellings++;
+				}
+				index=0;
+			}
 	
 	}
+
+
+	
 
 
 }
