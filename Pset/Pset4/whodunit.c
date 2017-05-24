@@ -34,4 +34,20 @@ int main(int argc,char *argv[])
 	BITMAPINFOHEADER bi;
 	fread(&bi,sizeof(BITMAPINFOHEADER),1,infile);
 
+	if(bf.bfType!=0x4d42||bf.bfOffBits!=54||bi.biSize!=40||bi.biBitCount!=24||bi.biCompression!=0)
+	{
+		fclose(outptr);
+		fclose(inptr);
+		fprintf(stderr,"Unsupported file format.\n");
+		return 4;
+	}
+
+	fwrite(&bf,sizeof(BITMAPFILEHEADER),1,outptr);
+	fwrite(&bi,sizeof(BITMAPINFOHEADER),1,outptr);
+
+	int padding=(4-(bi.biWidth*sizeof(RGBTRIPLE))%4)%4;
+
+	
+
+
 }
