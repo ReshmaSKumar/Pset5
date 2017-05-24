@@ -40,7 +40,16 @@ int main(int argc,char *argv[])
 			counter++;
 			fwrite(buffer,sizeof(buffer),1,temp);
 		}
+		else
+			if(counter>0)
+			{
+				fwrite(buffer,sizeof(buffer),1,temp);
+			}
+		fread(buffer,sizeof(buffer),1,inptr);
+
 	}
+	fclose(inptr);
+	return 0;
 
 }
 
