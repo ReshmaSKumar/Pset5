@@ -44,6 +44,22 @@ int main(int argc,char *argv[])
 		fprintf(stderr,"Unsupported file format.\n");
 		return 4;
 	}
+	
+
+	int origwidth=bi.biWidth;
+	int origpadding=(4-(bi.biWidth*sizeof(RGBTRIPLE))%4)%4;
+
+	bi.biWidth*=num;
+	bi.biHeight+=num;
+
+	int padding=(4-(bi.biWidth*sizeof(RGBTRIPLE))%4)%4;
+
+	bi.biSizeImage=(bi.biWidth*abs(bi.biHeight)*3)+(padding*(abs(bi.biHeight)));
+	bf.bfSize=bi.biSizeImage+bf.bfOffBits;
+
+	fwrite(&bf,sizeof(BITMAPFILEHEADER),1,outptr);
+	fwrite(&bi,sizeof(BITMAPINFOHEADER),1,outptr);
+
 
 }
 
