@@ -92,7 +92,39 @@ int main(int argc,char* argv[])
 	}
 
 
-	
+	if(ferror(fp))
+	{
+		fclose(fp);
+		printf("Error reading %s.\n",text);
+		unload();
+		return 1;
+	}
+
+	fclose(fp);
+
+	getrusage(RUSAGE_SELF,&before);
+	unsigned int n=size();
+	getrusage(RUSAGE_SELF,&after);
+
+	time_size=calculate(&before,&after);
+
+	if(!unloaded)
+	{
+		printf("Could not unload %s.\n",dictionary);
+		return 1;
+	}
+	 time_unload=calculate(&before,&after);
+
+	 printf("\nWORDS MISSPELLED:                %d\n",misspellings);
+	 printf("WORDS IN DICTIONARY:               %d\n",n);
+	 printf("WORDS IN TEXT:                    %d\n",words);
+	 printf("TIME IN load:                    %.2f\n",time_load);
+	 printf("TIME IN check:                   %.2f\n",time_check);
+	 printf("TIME IN size:                    %.2f\n",time_size);
+	 printf("TIME IN unload:                   %.2f\n",time_unload);
+	 printf("TIME IN TOTAL:                    %.2f\n\n",time_load+time_check+time_size+time_unload);
+	 return 0;
+
 
 
 }
